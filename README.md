@@ -1,5 +1,6 @@
 # FastMail
-[![](https://jitpack.io/v/alexsgi/fastmail.svg)](https://jitpack.io/#alexsgi/fastmail)
+[![](https://jitpack.io/v/alexsgi/fastmail.svg)](https://jitpack.io/#alexsgi/fastmail)  
+
 FastMail - an easy-to-use library for mail communication for Java. All you need is a SMTP server and to import the library.
 
 ## 1. Import
