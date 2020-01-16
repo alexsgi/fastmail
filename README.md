@@ -1,7 +1,7 @@
 # FastMail
 [![](https://jitpack.io/v/alexsgi/fastmail.svg)](https://jitpack.io/#alexsgi/fastmail)  
 
-FastMail - an easy-to-use library for mail communication for Java. All you need is a SMTP server and to import the library.
+FastMail - an easy-to-use library for mail communication for Java and Android. All you need is a SMTP server and to import the library.
 
 ## 1. Import
 **Gradle:**
@@ -116,3 +116,11 @@ How to check if it was successful ?
 boolean sendingSuccessful = FastMail.sendMail("This is the subject", "X-Mailer header", "This is the content", "to@example.com");
 ```
 Right, "sendMail" and "sendFastMail" returns a boolean. "True" if the sending was successful.
+
+## 3. Summary
+For the lazy ones :
+
+```java
+FastMail.init("smtp.example.com", "username", "password");
+FastMail.sendMail("Subject", "Header", "Content", "recipient@example.com");
+```
