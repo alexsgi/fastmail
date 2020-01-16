@@ -58,6 +58,37 @@ public class FastMail {
         }
     }
 
+    public static boolean sendMail(String subject, String header, String content, boolean isHtml, String... recipients) {
+        try {
+            if (!checkCredentials())
+                throw new Exception("Credentials missing or == null. Don't forget calling FastMail.init();");
+            Properties props = System.getProperties();
+            props.put(PROPERTY_HOST, HOST);
+            props.put(PROPERTY_AUTH, ENABLE_AUTH);
+            Session session = Session.getInstance(props, null);
+            Message msg = new MimeMessage(session);
+            msg.setFrom(new InternetAddress(USERNAME));
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(formatRecipients(recipients), false));
+            msg.setSubject(subject);
+            if(isHtml) {
+                msg.setContent(content, "text/html");
+            } else {
+                msg.setText(content);
+            }
+            msg.setHeader(PROPERTY_HEADER, header);
+            msg.setSentDate(new Date());
+            SMTPTransport t = (SMTPTransport) session.getTransport(PROTOCOL);
+            t.connect(HOST, USERNAME, PASSWORD);
+            t.sendMessage(msg, msg.getAllRecipients());
+            String serverResponse = t.getLastServerResponse();
+            t.close();
+            return serverResponse != null && serverResponse.trim().startsWith(SUCCESS);
+        } catch (Exception e) {
+            exceptionsList.add(e);
+            return false;
+        }
+    }
+
     public static boolean sendFastMail(String subject, String header, String content, String host, String username, String password, String... recipients) {
         try {
             if (checkChosenCredentials(host, username, password))
@@ -71,6 +102,37 @@ public class FastMail {
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(formatRecipients(recipients), false));
             msg.setSubject(subject);
             msg.setText(content);
+            msg.setHeader(PROPERTY_HEADER, header);
+            msg.setSentDate(new Date());
+            SMTPTransport t = (SMTPTransport) session.getTransport(PROTOCOL);
+            t.connect(host, username, password);
+            t.sendMessage(msg, msg.getAllRecipients());
+            String serverResponse = t.getLastServerResponse();
+            t.close();
+            return serverResponse != null && serverResponse.trim().startsWith(SUCCESS);
+        } catch (Exception e) {
+            exceptionsList.add(e);
+            return false;
+        }
+    }
+
+    public static boolean sendFastMail(String subject, String header, String content, String host, String username, String password, boolean isHtml, String... recipients) {
+        try {
+            if (checkChosenCredentials(host, username, password))
+                throw new Exception("Credentials missing or == null.");
+            Properties props = System.getProperties();
+            props.put(PROPERTY_HOST, host);
+            props.put(PROPERTY_AUTH, ENABLE_AUTH);
+            Session session = Session.getInstance(props, null);
+            Message msg = new MimeMessage(session);
+            msg.setFrom(new InternetAddress(username));
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(formatRecipients(recipients), false));
+            msg.setSubject(subject);
+            if(isHtml) {
+                msg.setContent(content, "text/html");
+            } else {
+                msg.setText(content);
+            }
             msg.setHeader(PROPERTY_HEADER, header);
             msg.setSentDate(new Date());
             SMTPTransport t = (SMTPTransport) session.getTransport(PROTOCOL);
