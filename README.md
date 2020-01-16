@@ -39,7 +39,8 @@ dependencies {
 
 ## 2. Usage
 
-Talk is cheap ... here is the code to send a mail :
+Talk is cheap ... here is the code to send a mail : 
+
 *Recommended config :*
 ```java
 FastMail.init("smtp.example.com", "username", "password");
