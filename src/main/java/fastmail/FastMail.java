@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 
+/**
+ * @author Alexander Sagorski
+ * @version 1.0
+ */
 public class FastMail {
 
     private static String HOST = null;
@@ -25,12 +29,25 @@ public class FastMail {
     private static final boolean ENABLE_AUTH = true;
     private static final String SUCCESS = "250 Requested mail action okay";
 
+    /**
+     * @param host     host of the SMTP server (e.g. smtp.example.com)
+     * @param username username for the SMTP server login
+     * @param password password for the SMTP server login
+     */
     public static void init(String host, String username, String password) {
         HOST = host;
         USERNAME = username;
         PASSWORD = password;
     }
 
+    /**
+     * @param subject    subject of the mail
+     * @param header     header of the mail; normally not such important
+     * @param content    content of the mail; plain text; not HTML
+     * @param recipients array of recipients
+     * @return returns true if sending successful
+     * for this method you need to call init at first
+     */
     public static boolean sendMail(String subject, String header, String content, String... recipients) {
         try {
             if (!checkCredentials())
@@ -58,6 +75,15 @@ public class FastMail {
         }
     }
 
+    /**
+     * @param subject    subject of the mail
+     * @param header     header of the mail; normally not such important
+     * @param content    content of the mail; plain text; not HTML
+     * @param isHtml     if true, content may be HTML code; if false content is plain text
+     * @param recipients array of recipients
+     * @return returns true if sending successful
+     * for this method you need to call init at first
+     */
     public static boolean sendMail(String subject, String header, String content, boolean isHtml, String... recipients) {
         try {
             if (!checkCredentials())
@@ -70,7 +96,7 @@ public class FastMail {
             msg.setFrom(new InternetAddress(USERNAME));
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(formatRecipients(recipients), false));
             msg.setSubject(subject);
-            if(isHtml) {
+            if (isHtml) {
                 msg.setContent(content, "text/html");
             } else {
                 msg.setText(content);
@@ -89,6 +115,17 @@ public class FastMail {
         }
     }
 
+    /**
+     * @param subject    subject of the mail
+     * @param header     header of the mail; normally not such important
+     * @param content    content of the mail; plain text; not HTML
+     * @param host       host of SMTP server
+     * @param username   username for SMTP login
+     * @param password   password for SMTP login
+     * @param recipients array of recipients
+     * @return returns true if sending successful
+     * for this method you needn't to call init
+     */
     public static boolean sendFastMail(String subject, String header, String content, String host, String username, String password, String... recipients) {
         try {
             if (checkChosenCredentials(host, username, password))
@@ -116,6 +153,18 @@ public class FastMail {
         }
     }
 
+    /**
+     * @param subject    subject of the mail
+     * @param header     header of the mail; normally not such important
+     * @param content    content of the mail; plain text; not HTML
+     * @param host       host of SMTP server
+     * @param username   username for SMTP login
+     * @param password   password for SMTP login
+     * @param isHtml     if true, content may be HTML code; if false content is plain text
+     * @param recipients array of recipients
+     * @return returns true if sending successful
+     * for this method you needn't to call init
+     */
     public static boolean sendFastMail(String subject, String header, String content, String host, String username, String password, boolean isHtml, String... recipients) {
         try {
             if (checkChosenCredentials(host, username, password))
@@ -128,7 +177,7 @@ public class FastMail {
             msg.setFrom(new InternetAddress(username));
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(formatRecipients(recipients), false));
             msg.setSubject(subject);
-            if(isHtml) {
+            if (isHtml) {
                 msg.setContent(content, "text/html");
             } else {
                 msg.setText(content);
@@ -147,14 +196,10 @@ public class FastMail {
         }
     }
 
-    public static void resetExceptionList() {
-        exceptionsList = new ArrayList<>();
-    }
-
-    public static ArrayList<Exception> getExceptionsList() {
-        return exceptionsList;
-    }
-
+    /**
+     * @param recipients array with all recipients
+     * @return returns a String containing all recipients
+     */
     private static String formatRecipients(String[] recipients) {
         StringBuilder stringBuilder = new StringBuilder();
         for (String str : recipients) {
@@ -163,24 +208,57 @@ public class FastMail {
         return stringBuilder.toString();
     }
 
+    /**
+     * @return returns true if all credentials are available (otherwise call init())
+     */
     private static boolean checkCredentials() {
         return checkChosenCredentials(HOST, USERNAME, PASSWORD);
     }
 
+    /**
+     * @param host     host of SMTP server
+     * @param username username for SMTP login
+     * @param password password for SMTP login
+     * @return returns true if credentials for SMTP login are okay
+     */
     private static boolean checkChosenCredentials(String host, String username, String password) {
-        return host != null && !host.trim().isEmpty() && username != null && !username.trim().isEmpty() && password != null && !password.trim().isEmpty();
+        return host != null && !host.replace(" ", "").isEmpty() && username != null && !username.replace(" ", "").isEmpty() && password != null && !password.replace(" ", "").isEmpty();
     }
 
+    /**
+     * @return returns the definded SMTP host via FastMail.init()
+     */
     public static String getHost() {
         return HOST;
     }
 
+    /**
+     * @return returns the definded SMTP username via FastMail.init()
+     */
     public static String getUsername() {
         return USERNAME;
     }
 
+    /**
+     * @return returns the definded SMTP password via FastMail.init()
+     */
     public static String getPassword() {
         return PASSWORD;
+    }
+
+    /**
+     * resets the ArrayList with all exceptions
+     */
+    public static void resetExceptionList() {
+        exceptionsList = new ArrayList<>();
+    }
+
+    /**
+     * @return returns the ArrayList with all exceptions
+     * (important e.g. when sending mail fails)
+     */
+    public static ArrayList<Exception> getExceptionsList() {
+        return exceptionsList;
     }
 
 }
