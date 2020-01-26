@@ -9,6 +9,7 @@ import javax.mail.internet.MimeMessage;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
+import java.util.UUID;
 
 /**
  * @author Alexander Sagorski
@@ -194,6 +195,15 @@ public class FastMail {
             exceptionsList.add(e);
             return false;
         }
+    }
+
+    /**
+     * @param recipient recipient of email (e.g. hello@example.com)
+     * @return returns true if sending successful
+     */
+    public static boolean sendTestMail(String recipient) {
+        return sendMail("TEST-MAIL: " + UUID.randomUUID(), "HEADER",
+                "If you read this, you probably configured your SMTP server right and the mail transport is working ! FastMail", recipient);
     }
 
     /**
