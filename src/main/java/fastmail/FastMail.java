@@ -129,7 +129,7 @@ public class FastMail {
      */
     public static boolean sendFastMail(String subject, String header, String content, String host, String username, String password, String... recipients) {
         try {
-            if (checkChosenCredentials(host, username, password))
+            if (checkCredentials(host, username, password))
                 throw new Exception("Credentials missing or == null.");
             Properties props = System.getProperties();
             props.put(PROPERTY_HOST, host);
@@ -168,7 +168,7 @@ public class FastMail {
      */
     public static boolean sendFastMail(String subject, String header, String content, String host, String username, String password, boolean isHtml, String... recipients) {
         try {
-            if (checkChosenCredentials(host, username, password))
+            if (checkCredentials(host, username, password))
                 throw new Exception("Credentials missing or == null.");
             Properties props = System.getProperties();
             props.put(PROPERTY_HOST, host);
@@ -222,7 +222,7 @@ public class FastMail {
      * @return returns true if all credentials are available (otherwise call init())
      */
     private static boolean checkCredentials() {
-        return checkChosenCredentials(HOST, USERNAME, PASSWORD);
+        return checkCredentials(HOST, USERNAME, PASSWORD);
     }
 
     /**
@@ -231,7 +231,7 @@ public class FastMail {
      * @param password password for SMTP login
      * @return returns true if credentials for SMTP login are okay
      */
-    private static boolean checkChosenCredentials(String host, String username, String password) {
+    private static boolean checkCredentials(String host, String username, String password) {
         return host != null && !host.replace(" ", "").isEmpty() && username != null && !username.replace(" ", "").isEmpty() && password != null && !password.replace(" ", "").isEmpty();
     }
 
