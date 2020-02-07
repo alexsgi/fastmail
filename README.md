@@ -124,10 +124,10 @@ For the lazy ones :
 FastMail.init("smtp.example.com", "username", "password");
 FastMail.sendMail("Subject", "Header", "Content", "recipient@example.com");
 ```
+---
 
 ## 4. IMAP
-Now we support IMAP :
-Example, which shows everything:
+Now we support IMAP - example, which shows everything:
 
 ```java
 MailReader mailReader = new MailReader("imap.example.com", "username@example.com", "Password");
