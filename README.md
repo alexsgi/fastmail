@@ -14,7 +14,7 @@ allprojects {
 ```
 ```gradle
 dependencies {
-	implementation 'com.github.alexsgi:fastmail:1.0'
+	implementation 'com.github.alexsgi:fastmail:2.0'
 }
 ```
 **Maven:**
@@ -31,11 +31,11 @@ dependencies {
 	<dependency>
 	    <groupId>com.github.alexsgi</groupId>
 	    <artifactId>fastmail</artifactId>
-	    <version>1.0</version>
+	    <version>2.0</version>
 	</dependency>
 </dependencies>
 ```
-(Instead of "1.0" you can insert every available version → check under "releases").
+(Instead of "2.0" you can insert every available version → check under "releases").
 
 ## 2. Usage
 
@@ -123,4 +123,37 @@ For the lazy ones :
 ```java
 FastMail.init("smtp.example.com", "username", "password");
 FastMail.sendMail("Subject", "Header", "Content", "recipient@example.com");
+```
+
+## 4. IMAP
+Now we support IMAP :
+Example, which shows everything:
+
+```java
+MailReader mailReader = new MailReader("imap.example.com", "username@example.com", "Password");
+IMAPObject imapObject = mailReader.getMessages();
+if (imapObject.getEmailFolders().size() == 0) {
+    System.err.println("No directories !");
+    return;
+}
+
+ArrayList<EmailFolder> emailFolders = imapObject.getEmailFolders();
+
+for (int i = 0; i < emailFolders.size(); i++) {
+
+    EmailFolder folder = emailFolders.get(i);
+    ArrayList<EmailObject> emailObjects = folder.getEmailObjects();
+	
+    System.err.println(i + ". " + folder.getFolderName());
+	
+    for (int j = 0; j < emailObjects.size(); j++) {
+	
+	EmailObject emailObject = emailObjects.get(j);
+	System.out.println(String.format("\t%d.%d %s", i, j, emailObject.getSubject()));
+	System.out.println(String.format("\t\t%s%s%s", "[", emailObject.getContent(), "]"));
+	System.out.println(String.format("\t\t%s%s%s %s%s%s", "[", emailObject.getSendDate(), "]", "[", emailObject.getReceivedDate(), "]"));
+		
+     }
+	
+}
 ```
