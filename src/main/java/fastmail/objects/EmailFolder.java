@@ -1,6 +1,5 @@
 package fastmail.objects;
 
-import javax.mail.Message;
 import java.util.ArrayList;
 
 public class EmailFolder {
