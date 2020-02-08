@@ -14,7 +14,7 @@ allprojects {
 ```
 ```gradle
 dependencies {
-	implementation 'com.github.alexsgi:fastmail:2.0'
+	implementation 'com.github.alexsgi:fastmail:1.5'
 }
 ```
 **Maven:**
@@ -31,7 +31,7 @@ dependencies {
 	<dependency>
 	    <groupId>com.github.alexsgi</groupId>
 	    <artifactId>fastmail</artifactId>
-	    <version>2.0</version>
+	    <version>1.5</version>
 	</dependency>
 </dependencies>
 ```
@@ -130,7 +130,7 @@ FastMail.sendMail("Subject", "Header", "Content", "recipient@example.com");
 Now we support IMAP - example, which shows everything:
 
 ```java
-MailReader mailReader = new MailReader("imap.example.com", "username@example.com", "Password");
+MailReader mailReader = new MailReader("imap.example.com", "username", "Password");
 IMAPObject imapObject = mailReader.getMessages();
 if (imapObject.getEmailFolders().size() == 0) {
     System.err.println("No directories !");
