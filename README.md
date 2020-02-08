@@ -35,7 +35,7 @@ dependencies {
 	</dependency>
 </dependencies>
 ```
-(Instead of "2.0" you can insert every available version → check under "releases").
+(Instead of "1.5" you can insert every available version → check under "releases").
 
 ## 2. Usage
 
