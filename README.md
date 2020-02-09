@@ -14,7 +14,7 @@ allprojects {
 ```
 ```gradle
 dependencies {
-	implementation 'com.github.alexsgi:fastmail:1.5'
+	implementation 'com.github.alexsgi:fastmail:<VERSION>'
 }
 ```
 **Maven:**
@@ -31,11 +31,10 @@ dependencies {
 	<dependency>
 	    <groupId>com.github.alexsgi</groupId>
 	    <artifactId>fastmail</artifactId>
-	    <version>1.5</version>
+	    <version><VERSION></version>
 	</dependency>
 </dependencies>
 ```
-(Instead of "1.5" you can insert every available version → check under "releases").
 
 ## 2. Usage
 
@@ -115,7 +114,6 @@ How to check if it was successful ?
 ```java
 boolean sendingSuccessful = FastMail.sendMail("This is the subject", "X-Mailer header", "This is the content", "to@example.com");
 ```
-Right, "sendMail" and "sendFastMail" returns a boolean. "True" if the sending was successful.
 
 ## 3. Summary
 For the lazy ones :
@@ -127,7 +125,7 @@ FastMail.sendMail("Subject", "Header", "Content", "recipient@example.com");
 ---
 
 ## 4. IMAP
-Now we support IMAP - example, which shows everything:
+Now we support IMAP !
 
 ```java
 MailReader mailReader = new MailReader("imap.example.com", "username", "Password");
