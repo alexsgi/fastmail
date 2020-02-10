@@ -14,7 +14,7 @@ allprojects {
 ```
 ```gradle
 dependencies {
-	implementation 'com.github.alexsgi:fastmail:<VERSION>'
+	implementation 'com.github.alexsgi:fastmail:VERSION'
 }
 ```
 **Maven:**
@@ -31,7 +31,7 @@ dependencies {
 	<dependency>
 	    <groupId>com.github.alexsgi</groupId>
 	    <artifactId>fastmail</artifactId>
-	    <version><VERSION></version>
+	    <version>VERSION</version>
 	</dependency>
 </dependencies>
 ```
