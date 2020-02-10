@@ -17,18 +17,16 @@ import java.util.UUID;
  */
 public class FastMail {
 
-    private static String HOST = null;
-    private static String USERNAME = null;
-    private static String PASSWORD = null;
-
-    private static ArrayList<Exception> exceptionsList = new ArrayList<>();
-
     private static final String PROTOCOL = "smtps";
     private static final String PROPERTY_HOST = "mail.smtps.host";
     private static final String PROPERTY_AUTH = "mail.smtps.auth";
     private static final String PROPERTY_HEADER = "X-Mailer";
     private static final boolean ENABLE_AUTH = true;
     private static final String SUCCESS = "250 Requested mail action okay";
+    private static String HOST = null;
+    private static String USERNAME = null;
+    private static String PASSWORD = null;
+    private static ArrayList<Exception> exceptionsList = new ArrayList<>();
 
     /**
      * @param host     host of the SMTP server (e.g. smtp.example.com)
