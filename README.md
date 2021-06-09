@@ -92,7 +92,7 @@ String password = FastMail.getPassword();
 ---
 Check if sending email was successful:
 ```java
-boolean sendingSuccessful = FastMail.sendMail("This is the subject", "X-Mailer header", "This is the content", "to@example.com");
+boolean sendingSuccessful = FastMail.sendMail("This is the subject", "This is the content", "to@example.com");
 ```
 
 ## 3. Summary
