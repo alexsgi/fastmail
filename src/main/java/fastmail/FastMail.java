@@ -21,6 +21,7 @@ public class FastMail {
     private static final String PROPERTY_HOST = "mail.smtps.host";
     private static final String PROPERTY_AUTH = "mail.smtps.auth";
     private static final String PROPERTY_HEADER = "X-Mailer";
+    private static final String PROPERTY_HEADER_CONTENT = "header";
     private static final boolean ENABLE_AUTH = true;
     private static final String SUCCESS = "250 Requested mail action okay";
     private static String HOST = null;
@@ -41,13 +42,12 @@ public class FastMail {
 
     /**
      * @param subject    subject of the mail
-     * @param header     header of the mail; normally not such important
      * @param content    content of the mail; plain text; not HTML
      * @param recipients array of recipients
      * @return returns true if sending successful
      * for this method you need to call init at first
      */
-    public static boolean sendMail(String subject, String header, String content, String... recipients) {
+    public static boolean sendMail(String subject, String content, String... recipients) {
         try {
             if (!checkCredentials())
                 throw new Exception("Credentials missing or == null. Don't forget calling FastMail.init();");
@@ -60,7 +60,7 @@ public class FastMail {
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(formatRecipients(recipients), false));
             msg.setSubject(subject);
             msg.setText(content);
-            msg.setHeader(PROPERTY_HEADER, header);
+            msg.setHeader(PROPERTY_HEADER, PROPERTY_HEADER_CONTENT);
             msg.setSentDate(new Date());
             SMTPTransport t = (SMTPTransport) session.getTransport(PROTOCOL);
             t.connect(HOST, USERNAME, PASSWORD);
@@ -76,14 +76,13 @@ public class FastMail {
 
     /**
      * @param subject    subject of the mail
-     * @param header     header of the mail; normally not such important
      * @param content    content of the mail; plain text; not HTML
      * @param isHtml     if true, content may be HTML code; if false content is plain text
      * @param recipients array of recipients
      * @return returns true if sending successful
      * for this method you need to call init at first
      */
-    public static boolean sendMail(String subject, String header, String content, boolean isHtml, String... recipients) {
+    public static boolean sendMail(String subject, String content, boolean isHtml, String... recipients) {
         try {
             if (!checkCredentials())
                 throw new Exception("Credentials missing or == null. Don't forget calling FastMail.init();");
@@ -100,7 +99,7 @@ public class FastMail {
             } else {
                 msg.setText(content);
             }
-            msg.setHeader(PROPERTY_HEADER, header);
+            msg.setHeader(PROPERTY_HEADER, PROPERTY_HEADER_CONTENT);
             msg.setSentDate(new Date());
             SMTPTransport t = (SMTPTransport) session.getTransport(PROTOCOL);
             t.connect(HOST, USERNAME, PASSWORD);
@@ -116,7 +115,6 @@ public class FastMail {
 
     /**
      * @param subject    subject of the mail
-     * @param header     header of the mail; normally not such important
      * @param content    content of the mail; plain text; not HTML
      * @param host       host of SMTP server
      * @param username   username for SMTP login
@@ -125,7 +123,7 @@ public class FastMail {
      * @return returns true if sending successful
      * for this method you needn't to call init
      */
-    public static boolean sendFastMail(String subject, String header, String content, String host, String username, String password, String... recipients) {
+    public static boolean sendFastMail(String subject, String content, String host, String username, String password, String... recipients) {
         try {
             if (checkCredentials(host, username, password))
                 throw new Exception("Credentials missing or == null.");
@@ -138,7 +136,7 @@ public class FastMail {
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(formatRecipients(recipients), false));
             msg.setSubject(subject);
             msg.setText(content);
-            msg.setHeader(PROPERTY_HEADER, header);
+            msg.setHeader(PROPERTY_HEADER, PROPERTY_HEADER_CONTENT);
             msg.setSentDate(new Date());
             SMTPTransport t = (SMTPTransport) session.getTransport(PROTOCOL);
             t.connect(host, username, password);
@@ -154,7 +152,6 @@ public class FastMail {
 
     /**
      * @param subject    subject of the mail
-     * @param header     header of the mail; normally not such important
      * @param content    content of the mail; plain text; not HTML
      * @param host       host of SMTP server
      * @param username   username for SMTP login
@@ -164,7 +161,7 @@ public class FastMail {
      * @return returns true if sending successful
      * for this method you needn't to call init
      */
-    public static boolean sendFastMail(String subject, String header, String content, String host, String username, String password, boolean isHtml, String... recipients) {
+    public static boolean sendFastMail(String subject, String content, String host, String username, String password, boolean isHtml, String... recipients) {
         try {
             if (checkCredentials(host, username, password))
                 throw new Exception("Credentials missing or == null.");
@@ -181,7 +178,7 @@ public class FastMail {
             } else {
                 msg.setText(content);
             }
-            msg.setHeader(PROPERTY_HEADER, header);
+            msg.setHeader(PROPERTY_HEADER, PROPERTY_HEADER_CONTENT);
             msg.setSentDate(new Date());
             SMTPTransport t = (SMTPTransport) session.getTransport(PROTOCOL);
             t.connect(host, username, password);
@@ -200,7 +197,7 @@ public class FastMail {
      * @return returns true if sending successful
      */
     public static boolean sendTestMail(String recipient) {
-        return sendMail("TEST-MAIL: " + UUID.randomUUID(), "HEADER",
+        return sendMail("TEST-MAIL: " + UUID.randomUUID(), PROPERTY_HEADER_CONTENT,
                 "If you read this, you probably configured your SMTP server right and the mail transport is working ! FastMail", recipient);
     }
 

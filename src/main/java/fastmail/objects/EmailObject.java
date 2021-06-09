@@ -4,11 +4,8 @@ import java.util.Date;
 
 public class EmailObject {
 
-    private String description;
-    private String subject;
-    private String content;
-    private Date sendDate;
-    private Date receivedDate;
+    private final String description, subject, content;
+    private final Date sendDate, receivedDate;
 
     private EmailObject(Builder builder) {
         this.description = builder.description;

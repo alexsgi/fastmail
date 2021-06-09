@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class IMAPObject {
 
-    private String host;
-    private ArrayList<EmailFolder> emailFolders;
+    private final String host;
+    private final ArrayList<EmailFolder> emailFolders;
 
     public IMAPObject(String host, ArrayList<EmailFolder> list) {
         this.emailFolders = list;

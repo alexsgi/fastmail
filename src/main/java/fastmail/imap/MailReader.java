@@ -15,9 +15,9 @@ public class MailReader {
 
     private static final String PROTOCOL = "imaps";
     private static final String MAIL_STORE_PROTOCOL = "mail.store.protocol";
-    private String HOST;
-    private String USERNAME;
-    private String PASSWORD;
+    private final String HOST;
+    private final String USERNAME;
+    private final String PASSWORD;
 
     public MailReader(String host, String username, String password) {
         this.HOST = host;

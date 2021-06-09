@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class EmailFolder {
 
-    private String folderName;
-    private ArrayList<EmailObject> emailObjects;
+    private final String folderName;
+    private final ArrayList<EmailObject> emailObjects;
 
     public EmailFolder(String folderName, ArrayList<EmailObject> list) {
         this.folderName = folderName;
