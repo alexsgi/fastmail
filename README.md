@@ -55,7 +55,7 @@ FastMail.sendMail("This is the subject", "This is the content", "to@example.com"
 ```
 Content should be in HTML ?
 ```java
-FastMail.sendMail("This is still the subject", "<h1>This is a Heading</h1> <p style=\"color=red;\">This is a RED paragraph.</p>", true);
+FastMail.sendMail("This is still the subject", "<h1>This is a Heading</h1> <p style=\"color=red;\">This is a RED paragraph.</p>", true, "hello@example.com");
 ```
 ---
 ```java 
@@ -65,12 +65,12 @@ and
 ```java 
 FastMail.sendMail(String subject, String content, boolean isHtml, String ... recipients);
 ```
-are static and can be called from (almost) everywhere. Don't forget to init !
+are static and can be called from everywhere. Don't forget to init!
 
 ---
 #### Some other cool functions
-Sometimes sending a mail fails. But why? 
-Get a list with all exceptions :
+Sometimes sending a mail fails. Why? 
+Get a list with all exceptions:
 ```java
 FastMail.getExceptionsList();
 ```

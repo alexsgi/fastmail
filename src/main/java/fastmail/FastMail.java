@@ -29,6 +29,9 @@ public class FastMail {
     private static String PASSWORD = null;
     private static ArrayList<Exception> exceptionsList = new ArrayList<>();
 
+    private FastMail() {
+    }
+
     /**
      * @param host     host of the SMTP server (e.g. smtp.example.com)
      * @param username username for the SMTP server login
