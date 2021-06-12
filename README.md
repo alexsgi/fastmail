@@ -1,4 +1,5 @@
 # FastMail
+![CI](https://github.com/alexsgi/fastmail/actions/workflows/maven.yml/badge.svg)
 [![](https://jitpack.io/v/alexsgi/fastmail.svg)](https://jitpack.io/#alexsgi/fastmail)
 
 FastMail - an easy-to-use library for mail communication for Java and Android. All you need is a SMTP server and to import the library.
