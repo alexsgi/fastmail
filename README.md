@@ -5,37 +5,8 @@
 FastMail - an easy-to-use library for mail communication for Java and Android. All you need is a SMTP server and to import the library.
 
 ## 1. Import
-**Gradle:**
-```gradle
-allprojects {
-    repositories {
-        maven { url 'https://jitpack.io' }
-    }
-}
-```
-```gradle
-dependencies {
-    implementation 'com.github.alexsgi:fastmail:VERSION'
-}
-```
-**Maven:**
-```maven
-<repositories>
-    <repository>
-        <id>jitpack.io</id>
-        <url>https://jitpack.io</url>
-    </repository>
-</repositories>
-```
-```maven
-<dependencies>
-    <dependency>
-        <groupId>com.github.alexsgi</groupId>
-        <artifactId>fastmail</artifactId>
-        <version>VERSION</version>
-    </dependency>
-</dependencies>
-```
+
+Library was uploaded via GitHub. Newest version and instructions are [here](https://github.com/alexsgi/fastmail/packages/).
 
 ## 2. Usage
 
