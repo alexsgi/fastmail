@@ -4,6 +4,9 @@
 
 FastMail - an easy-to-use library for mail communication for Java and Android. All you need is a SMTP server and to import the library.
 
+## **Note**
+**This project is deprecated. I recommend switching to [JakartaMail](https://github.com/eclipse-ee4j/mail).**
+
 ## 1. Import
 **Gradle:**
 ```gradle
